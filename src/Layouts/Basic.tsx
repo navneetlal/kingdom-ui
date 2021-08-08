@@ -1,159 +1,100 @@
-import React from 'react';
-import clsx from 'clsx';
-
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
-import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-
-import HeaderComponent from '../Components/Header';
-import KingdomSelectorComponent from '../Components/KingdomSelector';
+import { Layout, Menu, Breadcrumb, Dropdown } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, DownOutlined } from '@ant-design/icons';
 
 import RouterComponent from '../routes';
-import BreadCrumbComponent from '../Components/BreadCrumb';
+import { createUseStyles } from 'react-jss';
 
-const drawerWidth = 240;
+const { Header, Content, Sider } = Layout;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: 36,
-    },
-    hide: {
-      display: 'none',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-    },
-    drawerOpen: {
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    drawerClose: {
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(7) + 1,
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9) + 1,
-      },
-    },
-    toolbar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
-  }),
+const useStyles = createUseStyles({
+  logo: {
+    float: "left",
+    width: 120,
+    height: 31,
+    margin: "16px 24px 16px 0px",
+    background: "rgba(255, 255, 255, 0.3)",
+  },
+  siteLayoutBackground: {
+    background: "#fff"
+  }
+})
+
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      <a href="https://www.antgroup.com">1st menu item</a>
+    </Menu.Item>
+    <Menu.Item key="1">
+      <a href="https://www.aliyun.com">2nd menu item</a>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="3">3rd menu item</Menu.Item>
+  </Menu>
 );
 
-export default function BasicLayout() {
+export default function AntLayout() {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   return (
-    <div className={classes.root}>
-
-      <CssBaseline />
-      <HeaderComponent handleDrawerOpen={handleDrawerOpen} open={open} />
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        {
-          true ? <React.Fragment>
-            <KingdomSelectorComponent />
-            <Divider />
-          </React.Fragment> : null
-        }
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <BreadCrumbComponent />
-        <RouterComponent />
-      </main>
-    </div>
+    <Layout>
+      <Header className="header">
+        <div className={classes.logo} />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+          <Menu.Item key="1">nav 1</Menu.Item>
+          <Menu.Item key="2">nav 2</Menu.Item>
+          <Menu.Item key="3">nav 3</Menu.Item>
+        </Menu>
+      </Header>
+      <Layout>
+        <Sider width={200} className={classes.siteLayoutBackground}>
+          <Dropdown overlay={menu} trigger={['click']}>
+            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+              Click me <DownOutlined />
+            </a>
+          </Dropdown>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            defaultOpenKeys={['sub1']}
+            style={{ height: '100%', borderRight: 0 }}
+          >
+            <Menu.SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
+              <Menu.Item key="1">option1</Menu.Item>
+              <Menu.Item key="2">option2</Menu.Item>
+              <Menu.Item key="3">option3</Menu.Item>
+              <Menu.Item key="4">option4</Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
+              <Menu.Item key="5">option5</Menu.Item>
+              <Menu.Item key="6">option6</Menu.Item>
+              <Menu.Item key="7">option7</Menu.Item>
+              <Menu.Item key="8">option8</Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
+              <Menu.Item key="9">option9</Menu.Item>
+              <Menu.Item key="10">option10</Menu.Item>
+              <Menu.Item key="11">option11</Menu.Item>
+              <Menu.Item key="12">option12</Menu.Item>
+            </Menu.SubMenu>
+          </Menu>
+        </Sider>
+        <Layout style={{ padding: '0 24px 24px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>App</Breadcrumb.Item>
+          </Breadcrumb>
+          <Content
+            className={classes.siteLayoutBackground}
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}
+          >
+            <RouterComponent />
+          </Content>
+        </Layout>
+      </Layout>
+    </Layout>
   )
 }

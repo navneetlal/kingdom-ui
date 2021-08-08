@@ -1,25 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { ThemeProvider } from '@material-ui/core/styles';
-
 import BasicLayout from './Layouts/Basic';
-import KingdomTheme from './kingdom-theme';
 
 import reportWebVitals from './reportWebVitals';
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
-import './index.css';
+import './index.less';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={KingdomTheme}>
-      <BasicLayout />
-    </ThemeProvider>
+    <BasicLayout />
   </React.StrictMode>,
   document.getElementById('root')
 );
