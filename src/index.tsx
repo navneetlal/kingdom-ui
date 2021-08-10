@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import BasicLayout from './Layouts/Basic';
 
 import reportWebVitals from './reportWebVitals';
@@ -9,7 +11,9 @@ import './index.less';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BasicLayout />
+    <Router>
+      <BasicLayout/>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
