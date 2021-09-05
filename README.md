@@ -1,4 +1,4 @@
-https://img.shields.io/codefactor/grade/github/navneetlal/kingdom-ui/main?style=flat-square
+![code quality](https://img.shields.io/codefactor/grade/github/navneetlal/kingdom-ui/main?style=flat-square)
 
 # Getting Started with Create React App
 
